@@ -13,7 +13,7 @@ const db = mysql2.createConnection({
     database: "employee_db" 
 })
 
-app.get("/read", (req, res) => {
+app.get("/api/read", (req, res) => {
     db.query("SELECT * FROM employees", (err, result) => {
         if (err) {
             console.log(err);
@@ -24,7 +24,7 @@ app.get("/read", (req, res) => {
     })
 })
 
-app.delete("/delete/:id", (req, res) => {
+app.delete("/api/delete/:id", (req, res) => {
     const id = req.params.id;
     console.log("DELETED employee with id = " + JSON.stringify(id))
     db.query("DELETE FROM employees WHERE id = ?", id, (err, result) => {
@@ -36,7 +36,7 @@ app.delete("/delete/:id", (req, res) => {
     })
 })
 
-app.post("/create", (req, res) => {
+app.post("/api/create", (req, res) => {
     const name = req.body.name;
     const description = req.body.description;
     const age = req.body.age;
@@ -54,7 +54,7 @@ app.post("/create", (req, res) => {
     )
 })
 
-app.put("/update", (req, res) => {
+app.put("/api/update", (req, res) => {
     const id = req.body.id;
     const description = req.body.description;
     const age = req.body.age;
