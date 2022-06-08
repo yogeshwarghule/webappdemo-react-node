@@ -18,7 +18,7 @@ function App() {
       description: description,
       age: age
     }
-    Axios.post("http://localhost:8081/api/create", currEmployeeData).then(() => {
+    Axios.post("/api/create", currEmployeeData).then(() => {
       console.log("success")
       setEmployeeList([...employeeList, currEmployeeData])
     }
@@ -26,13 +26,13 @@ function App() {
   }
 
   const getEmployees = () => {
-    Axios.get("http://localhost:8081/api/read").then((res) => {
+    Axios.get("/api/read").then((res) => {
       setEmployeeList(res.data)
     })
   }
 
   const deleteEmployee = (id) => {
-    Axios.delete(`http://localhost:8081/api/delete/${id}`).then((response) => {
+    Axios.delete(`api/delete/${id}`).then((response) => {
       setEmployeeList(
         employeeList.filter((val) => {
           return val.id !== id;
@@ -42,7 +42,7 @@ function App() {
   }
 
   const updateEmployee = (id) => {
-    Axios.put("http://localhost:8081/api/update", { id: id, age: newAge, description: newDescription }).then(
+    Axios.put("/api/update", { id: id, age: newAge, description: newDescription }).then(
       (response) => {
         setEmployeeList(
           employeeList.map((val) => {

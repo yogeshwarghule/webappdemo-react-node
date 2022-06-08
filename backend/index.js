@@ -10,7 +10,7 @@ const db = mysql2.createConnection({
     user: "root",
     host: "localhost",
     password: "Password1",
-    database: "employee_db" 
+    database: "employee_db"
 })
 
 app.get("/api/read", (req, res) => {
