@@ -2,7 +2,7 @@ server {
     listen 80 default_server;
     listen [::]:80 default_server;
 
-    root /home/ubuntu/webappdemo/client/build;
+    root /var/www/build;
     index index.html index.htm index.nginx-debian.html;
 
     server_name _;
