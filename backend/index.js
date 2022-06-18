@@ -7,9 +7,9 @@ app.use(cors())
 app.use(express.json())
 
 const db = mysql2.createConnection({
-    user: "root",
-    host: "localhost",
-    password: "Password1",
+    user: "myuser",
+    host: "localhost", // change if needed
+    password: "mypass",
     database: "employee_db"
 })
 
