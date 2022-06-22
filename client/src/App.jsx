@@ -19,42 +19,43 @@ function App() {
       age: age
     }
     Axios.post("/api/create", currEmployeeData).then(() => {
-      console.log("success")
-      setEmployeeList([...employeeList, currEmployeeData])
+      console.log("/api/create sent to backend")
+      alert("Entry added to database. Click `Show Employees` to refresh")
+      // remove this so that refreshes are via database only
+      // setEmployeeList([...employeeList, currEmployeeData])
     }
     )
   }
 
   const getEmployees = () => {
     Axios.get("/api/read").then((res) => {
+      console.log("/api/read sent to backend")
       setEmployeeList(res.data)
     })
   }
 
   const deleteEmployee = (id) => {
     Axios.delete(`api/delete/${id}`).then((response) => {
-      setEmployeeList(
-        employeeList.filter((val) => {
-          return val.id !== id;
-        })
-      )
+      alert("Entry deleted from database. Click 'Show Employees' to refresh")
+      // setEmployeeList(employeeList.filter((val) => {return val.id !== id; }))
     })
   }
 
   const updateEmployee = (id) => {
     Axios.put("/api/update", { id: id, age: newAge, description: newDescription }).then(
       (response) => {
-        setEmployeeList(
-          employeeList.map((val) => {
-            return val.id === id
-              ? {
-                id: val.id,
-                name: val.name,
-                description: newDescription,
-                age: newAge
-              } : val
-          })
-        )
+        alert("Entry updated in database. Click 'Show Employees' to refresh")
+        // setEmployeeList(
+        //   employeeList.map((val) => {
+        //     return val.id === id
+        //       ? {
+        //         id: val.id,
+        //         name: val.name,
+        //         description: newDescription,
+        //         age: newAge
+        //       } : val
+        //   })
+        // )
       }
     )
   }
@@ -102,8 +103,8 @@ function App() {
                     Age: {val.age}
                   </h3>
                   <div>
-                  <input type="text" onChange={(event) => setNewDescription(event.target.value)} placeholder="Enter New Desc..." required/>
-                  <input type="number" onChange={(event) => setNewAge(event.target.value)} placeholder="Enter New Age..." required/>
+                    <input type="text" onChange={(event) => setNewDescription(event.target.value)} placeholder="Enter New Desc..." required />
+                    <input type="number" onChange={(event) => setNewAge(event.target.value)} placeholder="Enter New Age..." required />
 
                   </div>
                   <button onClick={() => updateEmployee(val.id)}>Update</button>
