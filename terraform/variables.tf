@@ -1,11 +1,11 @@
 variable "web_server_ami" {
   type    = string
-  default = "ami-0685b8f16c386debd"
+  default = "ami-0d38e3348f242b184"
 }
 
 variable "app_server_ami" {
   type    = string
-  default = "ami-01bfc31f1287cbd11"
+  default = "ami-06c41582cbc62cc0d"
 }
 
 variable "database_server_ami" {

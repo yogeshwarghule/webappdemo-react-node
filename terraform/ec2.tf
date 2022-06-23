@@ -16,6 +16,12 @@ resource "aws_instance" "app_server" {
     subnet_id = element(aws_subnet.private_subnet.*.id, 0)
     vpc_security_group_ids = [aws_security_group.app_server_sg.id]
     key_name = "lz-us-west-2"
+    user_data = <<EOF
+		#! /bin/bash
+        cd /home/ubuntu/webappdemo/
+        sleep 20
+        pm2 start index.js
+    EOF
     tags = {
         "Name" = "App_Terraform"
     }
