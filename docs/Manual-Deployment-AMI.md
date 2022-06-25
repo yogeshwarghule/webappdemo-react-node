@@ -1,11 +1,12 @@
 # Deployment Guide (AMI)
 
 This guide outlines the setup for a 3 tier web application using pre-made AMIs. The AMIs are currently not publicly available.
+For automated deployment with terraform, please refer to `TF-deployment-with-ami.md`.
 
 ## Prerequisites
-1. Web Server AMI (React + Nginx)
-2. App Server AMI (Node)
-3. Database Server AMI (MySQL)
+1. Web Server AMI (React + Nginx) (ami-0d38e3348f242b184)
+2. App Server AMI (Node) (ami-01bfc31f1287cbd11) (Note: This is AppServer v1 AMI, where pm2 has not been configured to automatically start. This is because if we use the v3 AMI, it will error out since the private IP addresses are not hardcoded with Terraform)
+3. Database Server AMI (MySQL) (ami-01a02370342aded44)
 
 ## 1. Create security groups
 The following security groups are recommended for the 3 different EC2 instances. 

@@ -20,6 +20,7 @@ resource "aws_eip" "nat_eip" {
   depends_on = [aws_internet_gateway.ig]
 }
 
+# NAT gateway
 resource "aws_nat_gateway" "nat" {
   allocation_id = aws_eip.nat_eip.id
   subnet_id     = element(aws_subnet.public_subnet.*.id, 0)
@@ -122,32 +123,32 @@ resource "aws_security_group" "default" {
   }
 }  
 
-resource "aws_network_interface" "app-server-eni" {
-  subnet_id = element(aws_subnet.private_subnet.*.id, 0)
-  private_ips = [ "10.0.10.10" ]
-  security_groups = [aws_security_group.app_server_sg.id]
+# resource "aws_network_interface" "app-server-eni" {
+#   subnet_id = element(aws_subnet.private_subnet.*.id, 0)
+#   private_ips = [ "10.0.10.10" ]
+#   security_groups = [aws_security_group.app_server_sg.id]
 
-  attachment {
-    instance = aws_instance.app_server.id
-    device_index = 1
-  }
+#   attachment {
+#     instance = aws_instance.app_server.id
+#     device_index = 1
+#   }
 
-  tags = {
-    Name = "TF-ENI-APP-SERVER"
-  }
-}
+#   tags = {
+#     Name = "TF-ENI-APP-SERVER"
+#   }
+# }
 
-resource "aws_network_interface" "db-server-eni" {
-  subnet_id = element(aws_subnet.private_subnet.*.id, 0)
-  private_ips = [ "10.0.10.20" ]
-  security_groups = [aws_security_group.db_server_sg.id]
+# resource "aws_network_interface" "db-server-eni" {
+#   subnet_id = element(aws_subnet.private_subnet.*.id, 0)
+#   private_ips = [ "10.0.10.20" ]
+#   security_groups = [aws_security_group.db_server_sg.id]
 
-  attachment {
-    instance = aws_instance.db_server.id
-    device_index = 1
-  }
+#   attachment {
+#     instance = aws_instance.db_server.id
+#     device_index = 1
+#   }
 
-  tags = {
-    Name = "TF-ENI-DB-SERVER"
-  }
-}
+#   tags = {
+#     Name = "TF-ENI-DB-SERVER"
+#   }
+# }

@@ -5,12 +5,12 @@ variable "web_server_ami" {
 
 variable "app_server_ami" {
   type    = string
-  default = "ami-06c41582cbc62cc0d"
+  default = "ami-04fa1e528a9c7bf67"
 }
 
 variable "database_server_ami" {
   type    = string
-  default = "ami-036165e6224a6bac2"
+  default = "ami-01a02370342aded44"
 }
 
 variable "instance_type" {

@@ -16,23 +16,19 @@ resource "aws_instance" "app_server" {
     subnet_id = element(aws_subnet.private_subnet.*.id, 0)
     vpc_security_group_ids = [aws_security_group.app_server_sg.id]
     key_name = "lz-us-west-2"
-    user_data = <<EOF
-		#! /bin/bash
-        cd /home/ubuntu/webappdemo/
-        sleep 20
-        pm2 start index.js
-    EOF
+    private_ip = "10.0.10.10"
     tags = {
         "Name" = "App_Terraform"
     }
 }
 
 resource "aws_instance" "db_server" {
-    ami = var.app_server_ami
+    ami = var.database_server_ami
     instance_type = var.instance_type
     subnet_id = element(aws_subnet.private_subnet.*.id, 0)
     vpc_security_group_ids = [aws_security_group.db_server_sg.id]
     key_name = "lz-us-west-2"
+    private_ip = "10.0.10.20"
     tags = {
         "Name" = "DB_Terraform"
     }
