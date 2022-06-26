@@ -6,9 +6,9 @@ This document outlines the steps required to deploy the web app using terraform.
 1. AWS account CLI credentials
 2. [Terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli) 
 3. Access to the respective AMIs (not public)
-    * Web instance (ami-0d38e3348f242b184)
-    * App instance (ami-04fa1e528a9c7bf67)
-    * DB instance (ami-01a02370342aded44)
+    * Web instance (`ami-0d38e3348f242b184`, WebServer - v2 (React Nginx)) 
+    * App instance (`ami-04fa1e528a9c7bf67`, AppServer - v3 (Node))
+    * DB instance (`ami-01a02370342aded44`, DatabaseServer - v3 (MySQL))
 
 ## Steps to launch the web app
 
