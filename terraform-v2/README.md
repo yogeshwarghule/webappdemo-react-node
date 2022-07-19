@@ -1,6 +1,6 @@
 # Deploy with Terraform
 
-This document outlines the steps required to deploy the web app using terraform. The Terraform code in this directory is able to deploy a 3 tier web application to any
+This document outlines the steps required to deploy the web app using terraform. The Terraform code in this directory is able to deploy a 3 tier web application to any given 3 subnets in a VPC.
 
 ## Prerequisites
 1. AWS account CLI credentials
@@ -20,7 +20,7 @@ aws configure
 ---
 **NOTE**
 
-You may need to remove `key_name` entries from `ec2.tf` and replace it with you key pair.
+You may need to remove `key_name` entries from `ec2.tf` and replace it with your key pair.
 
 ---
 3. Run the Terraform script
