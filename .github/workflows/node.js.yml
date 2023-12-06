@@ -3,7 +3,7 @@ name: Deploy React App to AWS S3
 on:
   push:
     branches:
-      - main  # Adjust the branch as needed.
+      - dev  # Adjust the branch as needed.
 
 jobs:
   build-and-deploy:
