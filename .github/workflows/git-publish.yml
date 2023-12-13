@@ -1,4 +1,4 @@
-name: Git Commands CI
+name: Git Commands CI  
 
 on:
   push:
