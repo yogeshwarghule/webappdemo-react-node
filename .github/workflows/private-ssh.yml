@@ -37,6 +37,7 @@ jobs:
 
           # Install dependencies
           npm install
+          #sudo apt install npm
           npm install express@4.18.2
 
           # Build the application
