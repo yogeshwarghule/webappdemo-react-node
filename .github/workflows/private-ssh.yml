@@ -5,6 +5,7 @@ on:
     branches:
       - main  # Adjust the branch as needed.
 
+
 jobs:
   deploy:
     runs-on: self-hosted # your self-hosted bastion host runner
@@ -23,27 +24,28 @@ jobs:
         ssh-keyscan -H "$EC2_IP" >> ~/.ssh/known_hosts
 
         ssh -i ~/.ssh/id_rsa ubuntu@${EC2_IP} << 'EOF'
-          echo "Connected to EC2 instance"
-          # Test commands to verify execution on Bastion Host
-          echo "Running on: $(hostname)"
-          echo "Current directory: $(pwd)"
-          echo "Listing files in current directory:"
-          ls -l
+          #cd /path/to/your/project  # replace with the path to your project on EC2
+          #git pull origin main      # pull latest code from main branch
 
-          # Test package installation from the internet
-          echo "Attempting to install curl..."
-          sudo apt-get update
-          sudo apt-get install -y curl
-          if [ $? -eq 0 ]; then
-              echo "Package installed successfully."
-              curl --version
-          else
-              echo "Failed to install package."
-          fi
+          # Set up Node.js (ensure the correct version is installed)
+          nvm install 18.17.1
+
+          nvm use 18.17.1
+          #nvm alias default  18.17.1
+          node --version
+          npm --version
+
+          # Install dependencies
+          npm install
+          npm install express@4.18.2
+
+          # Build the application
+          npm run build
+          #sudo npm start
+
         EOF
 
     - name: Clean up SSH Keys
       if: always()
       run: |
         rm -f ~/.ssh/id_rsa
-
