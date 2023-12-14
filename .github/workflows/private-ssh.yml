@@ -47,8 +47,3 @@ jobs:
       run: |
         rm -f ~/.ssh/id_rsa
 
-
-    - name: Clean up SSH Keys
-      if: always()
-      run: |
-        rm -f ~/.ssh/id_rsa
