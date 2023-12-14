@@ -1,0 +1,38 @@
+name: Node.js CI/CD on Private EC2
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted # your self-hosted bastion host runner
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: SSH and Execute Commands on EC2
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        EC2_IP: ${{ secrets.EC2_IP }}
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H "$EC2_IP" >> ~/.ssh/known_hosts
+
+        ssh -i ~/.ssh/id_rsa ec2-user@${EC2_IP} << 'EOF'
+          echo "Connected to EC2 instance"
+          # Test commands to verify execution on Bastion Host
+          echo "Running on: $(hostname)"
+          echo "Current directory: $(pwd)"
+          echo "Listing files in current directory:"
+          ls -l
+        EOF
+
+    - name: Clean up SSH Keys
+      if: always()
+      run: |
+        rm -f ~/.ssh/id_rsa
