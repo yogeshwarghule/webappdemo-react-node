@@ -29,7 +29,24 @@ jobs:
           echo "Current directory: $(pwd)"
           echo "Listing files in current directory:"
           ls -l
+
+          # Test package installation from the internet
+          echo "Attempting to install curl..."
+          sudo apt-get update
+          sudo apt-get install -y curl
+          if [ $? -eq 0 ]; then
+              echo "Package installed successfully."
+              curl --version
+          else
+              echo "Failed to install package."
+          fi
         EOF
+
+    - name: Clean up SSH Keys
+      if: always()
+      run: |
+        rm -f ~/.ssh/id_rsa
+
 
     - name: Clean up SSH Keys
       if: always()
